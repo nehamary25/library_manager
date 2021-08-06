@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title><%=title%></title>
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="/"><img src="/images/navbar-logo.svg" alt="" /></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ml-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ml-auto">
+                        <%for(let i = 0; i < nav.length; i++){%>
+                            <%if(nav[i].name==="profile"){%>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=profileName%> <img src="/images/person.png" alt="" style="width:20px;height:20px;border-radius:50%;"></a>
+                                </li>
+                            <%} else{%>
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=nav[i].name%></a></li>
+                            <%}%>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Add book-->
+        <section class="page-section input-section input-section-bg-dark d-flex align-items-center" id="addAuthor">
+            <div class="container">
+                <br>
+                <br>
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Add New Author</h2>
+                    <h3 class="section-subheading text-muted">Enter details of author.</h3>
+                </div>
+                <form id="addAuthorForm" name="addAuthorForm" class="input-form" action="/authors/add-author" method="POST" enctype="multipart/form-data" novalidate=true>
+                    <div class="row align-items-stretch mb-5">
+                        <div id="success" class="col-md-12 text-center"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Name *" value="<%=author.name%>" required="required" data-validation-required-message="Please enter author's name." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="a_books" name="books" type="text" placeholder="Major works *" value="<%=author.books%>" required="required" data-validation-required-message="Please enter popular works by the author." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <label for="img" style="color: white;">Select an image of size less than 1 MB</label>
+                                <input class="form-control" id="img" name="img" type="file" accept="image/*"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <textarea class="form-control" id="description" name="description" placeholder="About author *" required="required" data-validation-required-message="Please enter a short description about the author."><%=author.description%></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-xl text-uppercase" id="addAuthorButton" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-left">Copyright © Library Manager 2021</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-right">
+                        <a class="mr-3" href="#!">Privacy Policy</a>
+                        <a href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Form validation JS-->
+        <script src="/js/jqBootstrapValidation.js"></script>
+        <script>
+            var errorMsg = "<%=errorMsg%>";
+            var successMsg = "<%=successMsg%>";
+        </script>
+        <script src="/js/validation.js"></script>      <!-- This external js file handles validations -->
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>        
+    </body>
+</html>
